@@ -5,7 +5,7 @@ import { clsx } from 'clsx';
 import {
   defaultArticleState,
   ArticleStateType,
-} from '@/constants/articleProps.ts';
+} from '@/constants/articleProps';
 
 import { ArticleParamsForm } from '@components/article-params-form';
 import { Article } from '../article/Article';

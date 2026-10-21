@@ -57,10 +57,16 @@ module.exports = {
 								localIdentName: '[name]__[local]__[hash:base64:5]',
 								auto: /\.module\.\w+$/i,
 							},
-							importLoaders: 2, //Значение 2 говорит о том, что некоторые трансформации PostCSS нужно применить до css-loader.
+							importLoaders: 3, // увеличено до 3
 						},
 					},
 					'postcss-loader',
+					{
+						loader: 'resolve-url-loader', //ДОБАВЛЕНО
+						options: {
+							sourceMap: true,
+						},
+					},
 					{
 						loader: 'sass-loader',
 						options: {
@@ -72,11 +78,13 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'], //указываем файлы с которыми будет работать webpack
+		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'],
 		alias: {
 			fonts: path.resolve(__dirname, '..', './src/fonts'),
 			src: path.resolve(__dirname, '..', './src'),
 			components: path.resolve(__dirname, '..', './src/components'),
+			'@': path.resolve(__dirname, '..', './src'), //ДОБАВЛЕНО
+			'@components': path.resolve(__dirname, '..', './src/components'), //ДОБАВЛЕНО
 		},
 	},
 	plugins: [
@@ -90,7 +98,7 @@ module.exports = {
 				: 'static/styles/[name].css',
 		}),
 		new webpack.EnvironmentPlugin({
-			NODE_ENV: 'development', // значение по умолчанию 'development' если переменная process.env.NODE_ENV не передана
+			NODE_ENV: 'development',
 		}),
 	],
 };
